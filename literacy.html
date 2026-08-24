@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VaakSiddhi - Interactive Regional Literacy & Pronunciation</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar">
+    ✨ Regional Literacy Module • Master Alphabets, Vowels, Consonants & Matras with Voice Feedback ✨
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span>🕉️ VaakSiddhi</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="literacy.html" class="nav-link active">Literacy</a>
+      <a href="speech.html" class="nav-link">Speech Practice</a>
+      <a href="twisters.html" class="nav-link">Tongue Twisters</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="premium.html" class="nav-link nav-premium-btn">💎 Premium</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+      <a href="login.html" class="nav-btn-inquire">Login / Switch ♥</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header / Language & Filter Bar -->
+    <div class="card card-cream" style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;">
+      <div>
+        <span class="cursive-font" style="font-size:20px;">interactive script learning</span>
+        <h2 style="font-size:26px; color:#3d131f; margin:0;">📚 Regional Script & Literacy Module</h2>
+      </div>
+
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <label style="font-size:12px; font-weight:800; color:#3d131f; text-transform:uppercase;">Select Language:</label>
+        <select id="literacy-language-select" style="padding:10px 18px; border-radius:30px; border:1.5px dashed #3d131f; font-weight:700; font-size:14px; background:#fffdf0; color:#3d131f; outline:none; cursor:pointer; box-shadow:2px 2px 0px #3d131f;">
+          <option value="Marathi">Marathi (मराठी)</option>
+          <option value="Hindi">Hindi (हिंदी)</option>
+          <option value="Kannada">Kannada (ಕನ್ನಡ)</option>
+          <option value="Tamil">Tamil (தமிழ்)</option>
+          <option value="Telugu">Telugu (తెలుగు)</option>
+          <option value="English">English</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Active Lesson Practice Arena -->
+    <div class="card card-pink" id="active-lesson-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; gap:8px;">
+          <span id="lesson-category-badge" style="background:#fffdf0; color:#3d131f; font-size:12px; font-weight:800; padding:4px 12px; border-radius:12px; border:1px solid #3d131f;">
+            Vowels (स्वर)
+          </span>
+          <span id="lesson-difficulty-badge" style="background:#dbeafe; color:#1e40af; font-size:12px; font-weight:800; padding:4px 12px; border-radius:12px; border:1px solid #3d131f;">
+            Beginner
+          </span>
+        </div>
+        <span id="lesson-xp-badge" style="background:#fef9c3; color:#854d0e; font-size:12px; font-weight:800; padding:4px 12px; border-radius:12px; border:1px solid #3d131f;">
+          +15 XP
+        </span>
+      </div>
+
+      <!-- Character Visual Display Frame -->
+      <div class="polaroid-frame" style="background:#ffffff; border:2px dashed #3d131f; text-align:center; padding:30px 20px; margin-bottom:20px; position:relative;">
+        <div id="literacy-char-display" style="font-size:72px; font-weight:800; color:#3d131f; line-height:1; margin-bottom:8px; font-family:'Playfair Display', serif;">
+          अ
+        </div>
+        <div id="literacy-roman-display" style="font-size:22px; font-weight:700; color:#78263e; margin-bottom:6px;">
+          (a)
+        </div>
+        <div id="literacy-example-display" style="font-size:15px; color:#5c3240; font-weight:600;">
+          Example: <b>अननस</b> (Ananas - Pineapple)
+        </div>
+
+        <!-- Pronunciation Audio Controls -->
+        <div style="margin-top:16px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+          <button id="literacy-listen-btn" class="btn btn-primary" style="padding:8px 20px; font-size:14px;">
+            🔊 Listen Audio
+          </button>
+          <button id="literacy-slow-btn" class="btn btn-outline-dashed" style="padding:8px 18px; font-size:14px;">
+            🐌 Slow Audio (0.7x)
+          </button>
+        </div>
+      </div>
+
+      <!-- Voice Practice & Evaluation Interface -->
+      <div style="background:#fffdf0; border:2px dashed #3d131f; border-radius:18px; padding:20px; margin-bottom:16px;">
+        <h4 style="margin:0 0 10px 0; font-size:18px; color:#3d131f; font-family:'Playfair Display', serif;">🎙️ Voice Pronunciation Practice</h4>
+        
+        <div id="literacy-rec-status" style="display:none; color:#dc2626; font-weight:800; margin-bottom:8px; font-size:14px;">
+          🔴 Listening... Speak clearly now!
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <button id="literacy-mic-btn" class="btn btn-primary" style="padding:10px 24px; font-size:15px;">
+            🎙️ Record Pronunciation
+          </button>
+          <button id="literacy-stop-btn" class="btn" style="background:#dc2626; color:#fff; border:2px solid #3d131f; padding:10px 24px; font-size:15px; display:none; border-radius:30px; cursor:pointer;">
+            ⏹️ Stop Recording
+          </button>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <label style="font-size:11px; font-weight:800; color:#3d131f; text-transform:uppercase; display:block; margin-bottom:4px;">Captured Audio Input:</label>
+          <div id="literacy-transcript" style="background:#ffffff; border:1px dashed #3d131f; padding:12px; border-radius:10px; font-size:15px; font-weight:700; color:#280b14; min-height:36px;">
+            Click 'Record Pronunciation' and speak into your microphone...
+          </div>
+        </div>
+
+        <!-- Evaluation Feedback Output -->
+        <div id="literacy-eval-box" style="display:none;"></div>
+      </div>
+
+      <!-- Navigation Between Lessons -->
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button id="literacy-prev-btn" class="btn btn-outline-dashed" style="padding:8px 16px; font-size:13px;">
+          👈 Previous
+        </button>
+        <span id="literacy-progress-text" style="font-size:13px; font-weight:800; color:#3d131f;">
+          Lesson 1 of 12
+        </span>
+        <button id="literacy-next-btn" class="btn btn-secondary" style="padding:8px 20px; font-size:13px;">
+          Next Lesson 👉
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Category Filter Tabs & Grid Browser -->
+    <div style="margin-top:28px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+        <h3 style="font-size:22px; color:#3d131f; margin:0;">📖 All Script Lessons</h3>
+        
+        <div id="literacy-category-tabs" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button data-cat="All" class="btn btn-primary cat-tab-btn" style="padding:6px 14px; font-size:12px;">All</button>
+          <button data-cat="Vowels" class="btn btn-outline-dashed cat-tab-btn" style="padding:6px 14px; font-size:12px;">Vowels (स्वर)</button>
+          <button data-cat="Consonants" class="btn btn-outline-dashed cat-tab-btn" style="padding:6px 14px; font-size:12px;">Consonants (व्यंजन)</button>
+          <button data-cat="Matras" class="btn btn-outline-dashed cat-tab-btn" style="padding:6px 14px; font-size:12px;">Matras (मात्रा)</button>
+          <button data-cat="Words" class="btn btn-outline-dashed cat-tab-btn" style="padding:6px 14px; font-size:12px;">Words (शब्द)</button>
+        </div>
+      </div>
+
+      <div id="literacy-lessons-grid" class="grid-3"></div>
+    </div>
+
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/audioEngine.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/adaptive.js"></script>
+  <script src="js/subscription.js"></script>
+  <script src="js/literacy.js"></script>
+</body>
+</html>
